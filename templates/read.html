@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ page.title }}</title>
+</head>
+<body>
+
+<h2>{{ page.title }}</h2>
+<p>{{ page.content }}</p>
+
+{% if next_page %}
+    <form action="{{ url_for('read', page_no=next_page) }}" method="get">
+        <button type="submit">Next Page →</button>
+    </form>
+{% else %}
+    <p>You've finished reading!</p>
+{% endif %}
+<a href="{{ url_for('dashboard') }}">
+    <button>Dashboard</button>
+</a>
+
+</body>
+</html>
