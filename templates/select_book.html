@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select a Book</title>
+</head>
+<body>
+    <h1>Select a Book</h1>
+    <ul>
+        {% for book in books %}
+        <li>
+            <form action="{{ url_for('dashboard') }}" method="get">
+                <input type="hidden" name="title" value="{{ book[0] }}">
+                <button type="submit">{{ book[0] }}</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

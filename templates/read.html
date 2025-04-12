@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ page.title }}</title>
+    <title>{{ page.chapter_title }} - {{ page.title }}</title>
 </head>
 <body>
 
-<h2>{{ page.title }}</h2>
+<h1>{{ page.title }}</h1> <!-- Aesop's Fables -->
+<h2>{{ page.chapter_title }}</h2> <!-- Specific story title -->
+
 <p>{{ page.content }}</p>
 
 {% if next_page %}
     <form action="{{ url_for('read', page_no=next_page) }}" method="get">
-        <button type="submit">Next Page →</button>
+        <button type="submit">Next Page</button>
     </form>
-{% else %}
+{% endif %}
+{% if previous_page %}
+    <form action="{{ url_for('read', page_no=previous_page) }}" method="get">
+        <button type="submit">Previous Page</button>
+    </form>
+{% endif %}
+{% if not next_page %}
     <p>You've finished reading!</p>
 {% endif %}
-<a href="{{ url_for('dashboard') }}">
-    <button>Dashboard</button>
-</a>
+
+<form action="{{ url_for('dashboard') }}" method="get">
+    <input type="hidden" name="title" value="{{ page.title }}">
+    <button type="submit">Dashboard</button>
+</form>
 
 </body>
 </html>

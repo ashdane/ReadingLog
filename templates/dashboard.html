@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .graph-container {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
 
@@ -11,18 +20,46 @@
     <p>Total Pages: {{ total_pages }}</p>
     <p>Pages Read: {{ pages_read }}</p>
     <p>Pages Left to Read: {{ pages_left }}</p>
+    <p>Average Pages Per Session: {{ avg_pages_per_session }}</p>
 
-    <h2>Pages Read Per Session</h2>
-    <img src="data:image/png;base64,{{ bar_chart }}" alt="Bar Chart">
+    <div class="graph-container">
+        <h2>Pages Read Per Session</h2>
+        <img src="data:image/png;base64,{{ bar_chart }}" alt="Bar Chart">
+    </div>
 
-    <h2>Pages Read vs Not Read</h2>
-    <img src="data:image/png;base64,{{ pie_chart }}" alt="Pie Chart">
+    <div class="graph-container">
+        <h2>Reading Trend Over Time</h2>
+        <img src="data:image/png;base64,{{ line_chart }}" alt="Line Chart">
+    </div>
 
-    <a href="{{ url_for('dashboard') }}"><button>Dashboard</button></a>
+    <div class="graph-container">
+        <h2>Pages Read vs Not Read</h2>
+        <img src="data:image/png;base64,{{ pie_chart }}" alt="Pie Chart">
+    </div>
+
+    <div class="graph-container">
+        <h2>Reading Streaks</h2>
+        <img src="data:image/png;base64,{{ streak_chart }}" alt="Streak Chart">
+    </div>
+
+    <div class="graph-container">
+        <h2>Reading Speed (Pages per Hour)</h2>
+        <img src="data:image/png;base64,{{ speed_chart }}" alt="Speed Chart">
+    </div>
+
+    <div class="graph-container">
+        <h2>Page Progression Over Sessions</h2>
+        <img src="data:image/png;base64,{{ cumulative_chart }}" alt="Cumulative Progress Chart">
+    </div>
+
+    <div class="graph-container">
+        <h2>Weekly Comparison</h2>
+        <img src="data:image/png;base64,{{ weekly_chart }}" alt="Weekly Comparison Chart">
+    </div>
+
+    <a href="{{ url_for('read', page_no=last_read_page) }}"><button>Return to Page</button></a>
     <a href="{{ url_for('index') }}"><button>Home</button></a>
-
     <a href="{{ url_for('reset_progress') }}">Reset Reading Progress</a>
-
 
 </body>
 </html>
